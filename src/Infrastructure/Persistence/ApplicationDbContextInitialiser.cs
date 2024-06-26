@@ -75,13 +75,15 @@ public class ApplicationDbContextInitialiser
         if (!_context.Employees.Any())
         {
 
+            List<Employee> employees = new();
             for (int i = 1; i <= 10; i++)
             {
-                _context.Employees.Add(new Employee
+                employees.Add(new Employee
                 {
                     Name = $"Employee {i}",
                 });
             }
+            await _context.Employees.AddRangeAsync(employees);
             await _context.SaveChangesAsync();
         }
 
@@ -89,16 +91,17 @@ public class ApplicationDbContextInitialiser
         {
 
             var random = new Random();
+            var employeeIds = await _context.Employees.Select(e => e.Id).ToListAsync(); // Get employee IDs from the context
+
             for (int i = 1; i <= 20; i++)
             {
                 _context.TodoItems.Add(new TodoItem
                 {
-                    Id = i, // Assuming Id is generated manually; otherwise, it can be omitted if it is auto-generated
                     Title = $"Task Title {i}",
                     Description = $"Task Description {i}",
                     Status = random.Next(0, 5), // Randomly set the status between 0 and 4
                     Priority = (PriorityLevel)random.Next(0, 4), // Randomly set the priority enum value
-                    EmployeeId = random.Next(1, 11) // Assign the task to a random employee
+                    EmployeeId = employeeIds[random.Next(employeeIds.Count)] // Randomly assign to an employee or leave unassigned
                 });
             }
 

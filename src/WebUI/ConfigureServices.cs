@@ -35,13 +35,13 @@ public static class ConfigureServices
         services.AddOpenApiDocument(configure =>
         {
             configure.Title = "BackEnd API";
-            configure.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
-            {
-                Type = OpenApiSecuritySchemeType.ApiKey,
-                Name = "Authorization",
-                In = OpenApiSecurityApiKeyLocation.Header,
-                Description = "Type into the textbox: Bearer {your JWT token}."
-            });
+            // configure.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
+            // {
+            //     Type = OpenApiSecuritySchemeType.ApiKey,
+            //     Name = "Authorization",
+            //     In = OpenApiSecurityApiKeyLocation.Header,
+            //     Description = "Type into the textbox: Bearer {your JWT token}."
+            // });
 
             configure.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
         });

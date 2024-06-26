@@ -7,7 +7,7 @@ public class TodoItem : BaseAuditableEntity
         public string Description { get; set; }
         public int Status { get; set; }
         public PriorityLevel Priority { get; set; }
-        public int EmployeeId { get; set; }
+        public int? EmployeeId { get; set; } // Nullable EmployeeId
         public Employee Employee { get; set; }
     
 }

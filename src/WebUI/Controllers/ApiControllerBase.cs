@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 namespace BackEnd.WebUI.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 public abstract class ApiControllerBase : ControllerBase
 {
     private ISender _mediator = null!;
