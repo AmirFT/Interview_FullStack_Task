@@ -1,4 +1,5 @@
 ﻿using BackEnd.Domain.Entities;
+using BackEnd.Domain.Enums;
 using BackEnd.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -66,26 +67,43 @@ public class ApplicationDbContextInitialiser
         if (_userManager.Users.All(u => u.UserName != administrator.UserName))
         {
             await _userManager.CreateAsync(administrator, "Administrator1!");
-            await _userManager.AddToRolesAsync(administrator, new [] { administratorRole.Name });
+            await _userManager.AddToRolesAsync(administrator, new[] { administratorRole.Name });
         }
 
         // Default data
         // Seed, if necessary
-        if (!_context.TodoLists.Any())
+        if (!_context.Employees.Any())
         {
-            _context.TodoLists.Add(new TodoList
+
+            for (int i = 1; i <= 10; i++)
             {
-                Title = "Todo List",
-                Items =
+                _context.Employees.Add(new Employee
                 {
-                    new TodoItem { Title = "Make a todo list 📃" },
-                    new TodoItem { Title = "Check off the first item ✅" },
-                    new TodoItem { Title = "Realise you've already done two things on the list! 🤯"},
-                    new TodoItem { Title = "Reward yourself with a nice, long nap 🏆" },
-                }
-            });
+                    Name = $"Employee {i}",
+                });
+            }
+            await _context.SaveChangesAsync();
+        }
+
+        if (!_context.TodoItems.Any())
+        {
+
+            var random = new Random();
+            for (int i = 1; i <= 20; i++)
+            {
+                _context.TodoItems.Add(new TodoItem
+                {
+                    Id = i, // Assuming Id is generated manually; otherwise, it can be omitted if it is auto-generated
+                    Title = $"Task Title {i}",
+                    Description = $"Task Description {i}",
+                    Status = random.Next(0, 5), // Randomly set the status between 0 and 4
+                    Priority = (PriorityLevel)random.Next(0, 4), // Randomly set the priority enum value
+                    EmployeeId = random.Next(1, 11) // Assign the task to a random employee
+                });
+            }
 
             await _context.SaveChangesAsync();
         }
     }
 }
+

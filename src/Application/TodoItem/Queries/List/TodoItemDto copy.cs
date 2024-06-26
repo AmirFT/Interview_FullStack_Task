@@ -4,7 +4,7 @@ using BackEnd.Domain.Enums;
 
 namespace BackEnd.Application.TodoItems.Queries.List;
 
-public class TodoItemDto : IMapFrom<TodoItem>
+public class TodoItemsDto : IMapFrom<TodoItem>
 {
     public int Status { get; set; }
     public List<TodoItemBriefDto> Details { get; set; }

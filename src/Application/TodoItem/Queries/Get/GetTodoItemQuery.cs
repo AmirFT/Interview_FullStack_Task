@@ -10,23 +10,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BackEnd.Application.TodoItems.Queries.Get;
 
-public record GetTodoItemsQuery : IRequest<TodoItemDto>
+public record GetTodoItemQuery : IRequest<TodoItemDto>
 {
     public int Id { get; init; }
 }
 
-public class GetTodoItemsQueryHandler : IRequestHandler<GetTodoItemsQuery, TodoItemDto>
+public class GetTodoItemQueryHandler : IRequestHandler<GetTodoItemQuery, TodoItemDto>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetTodoItemsQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetTodoItemQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public async Task<TodoItemDto> Handle(GetTodoItemsQuery request, CancellationToken cancellationToken)
+    public async Task<TodoItemDto> Handle(GetTodoItemQuery request, CancellationToken cancellationToken)
     {
 
         return await _context.TodoItems

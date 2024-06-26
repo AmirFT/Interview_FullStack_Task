@@ -10,12 +10,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BackEnd.Application.TodoItems.Queries.List;
 
-public record GetTodoItemsQuery : IRequest<List<TodoItemDto>>
+public record GetTodoItemsQuery : IRequest<List<TodoItemsDto>>
 {
     public int UserId { get; init; }
 }
 
-public class GetTodoItemsQueryHandler : IRequestHandler<GetTodoItemsQuery, List<TodoItemDto>>
+public class GetTodoItemsQueryHandler : IRequestHandler<GetTodoItemsQuery, List<TodoItemsDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -26,7 +26,7 @@ public class GetTodoItemsQueryHandler : IRequestHandler<GetTodoItemsQuery, List<
         _mapper = mapper;
     }
 
-    public async Task<List<TodoItemDto>> Handle(GetTodoItemsQuery request, CancellationToken cancellationToken)
+    public async Task<List<TodoItemsDto>> Handle(GetTodoItemsQuery request, CancellationToken cancellationToken)
     {
 
         var predicate = PredicateBuilder.True<TodoItem>();
@@ -41,7 +41,7 @@ public class GetTodoItemsQueryHandler : IRequestHandler<GetTodoItemsQuery, List<
             .Where(predicate)
             .GroupBy(x => x.Status)
             .OrderByDescending(x => x.Key)
-            .Select(x => new TodoItemDto
+            .Select(x => new TodoItemsDto
             {
                 Status = x.Key,
                 Details = x.Select(y => new TodoItemBriefDto

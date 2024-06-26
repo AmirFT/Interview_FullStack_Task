@@ -1,11 +1,12 @@
-﻿using BackEnd.Application.WeatherForecasts.Queries.GetWeatherForecasts;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using BackEnd.Application.Common.Models;
 using BackEnd.Application.TodoItems.Commands.CreateTodoItem;
 using BackEnd.Application.TodoItems.Commands.UpdateTodoItem;
 using BackEnd.Application.TodoItems.Commands.DeleteTodoItem;
 using System.Data;
 using BackEnd.Application.TodoItems.Commands.UpdateTodoItemDetail;
+using BackEnd.Application.TodoItems.Queries.Get;
+using BackEnd.Application.TodoItems.Queries.List;
 
 namespace BackEnd.WebUI.Controllers;
 
@@ -68,11 +69,11 @@ public class TaskController : ApiControllerBase
             }
         }
         [HttpGet]
-        public async Task<ActionResult<ExpenseGetByIdModelDTO>> Get([FromQuery] int id)
+        public async Task<ActionResult<TodoItemDto>> Get([FromQuery] int id)
         {
             try
             {
-                var result = await Mediator.Send(new GetExpenseByIdQuery { Id = id });
+                var result = await Mediator.Send(new GetTodoItemQuery { Id = id });
                 return result;
             }
             catch (Exception ex)
@@ -82,17 +83,11 @@ public class TaskController : ApiControllerBase
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<ExpenseListModelDTO>>> List([FromBody] FilterModelInput input)
+        public async Task<ActionResult<List<TodoItemsDto>>> List([FromBody] GetTodoItemsQuery query)
         {
             try
             {
-                return await Mediator.Send(new GetExpenseListQuery
-                {
-                    FromDate = input.FromDate,
-                    ToDate = input.ToDate,
-                    ExpenseTypeId = input.TypeId,
-                    FundId = input.FundId
-                });
+                return await Mediator.Send(query);
             }
             catch (Exception ex)
             {

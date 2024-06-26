@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace BackEnd.Application.TodoItems.Queries.Get;
 
-public class GetTodoItemsQueryValidator : AbstractValidator<GetTodoItemsQuery>
+public class GetTodoItemsQueryValidator : AbstractValidator<GetTodoItemQuery>
 {
     private readonly IApplicationDbContext _context;
 
