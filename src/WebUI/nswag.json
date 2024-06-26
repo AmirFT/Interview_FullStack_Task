@@ -1,5 +1,5 @@
 {
-  "runtime": "Net60",
+  "runtime": "Net70",
   "defaultVariables": null,
   "documentGenerator": {
     "aspNetCoreToOpenApi": {
@@ -10,7 +10,7 @@
       "targetFramework": null,
       "noBuild": true,
       "msBuildOutputPath": null,
-      "verbose": false,
+      "verbose": true,
       "workingDirectory": null,
       "requireParametersWithoutDefault": true,
       "apiGroupNames": null,
