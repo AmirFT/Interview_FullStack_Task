@@ -7,9 +7,11 @@ using System.Data;
 using BackEnd.Application.TodoItems.Commands.UpdateTodoItemDetail;
 using BackEnd.Application.TodoItems.Queries.Get;
 using BackEnd.Application.TodoItems.Queries.List;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BackEnd.WebUI.Controllers;
 
+[AllowAnonymous]
 public class TaskController : ApiControllerBase
 {
     
@@ -68,6 +70,7 @@ public class TaskController : ApiControllerBase
                 return BadRequest(HandleError(ex));
             }
         }
+        
         [HttpGet]
         public async Task<ActionResult<TodoItemDto>> Get([FromQuery] int id)
         {

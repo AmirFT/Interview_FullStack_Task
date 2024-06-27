@@ -43,7 +43,7 @@ public static class ConfigureServices
             //     Description = "Type into the textbox: Bearer {your JWT token}."
             // });
 
-            configure.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
+            // configure.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
         });
 
         return services;

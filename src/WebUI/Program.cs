@@ -32,7 +32,8 @@ app.UseHealthChecks("/health");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseSwaggerUi(settings =>
+app.UseOpenApi();
+app.UseSwaggerUi3(settings =>
 {
     settings.Path = "/api";
     settings.DocumentPath = "/api/specification.json";
@@ -44,9 +45,9 @@ app.UseAuthentication();
 // app.UseIdentityServer();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
+app.MapControllers();
+    // name: "default",
+    // pattern: "{controller}/{action=Index}/{id?}");
 
 app.MapRazorPages();
 
