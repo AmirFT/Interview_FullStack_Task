@@ -12,8 +12,8 @@ public class GetTodoItemsQueryValidator : AbstractValidator<GetTodoItemsQuery>
     {
         _context = context;
 
-        RuleFor(x => x.UserId)
-        .EmployeeExist(_context);
+        //RuleFor(x => x.UserId)
+        //.EmployeeExist(_context);
 
 
     }
