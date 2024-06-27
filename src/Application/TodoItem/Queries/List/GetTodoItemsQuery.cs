@@ -36,8 +36,9 @@ public class GetTodoItemsQueryHandler : IRequestHandler<GetTodoItemsQuery, List<
             predicate = predicate.And(x => x.EmployeeId == request.UserId);
         }
 
-        return await _context.TodoItems
-        .Include(x => x.Employee)
+        return await _context
+            .TodoItems
+            .Include(x => x.Employee)
             .Where(predicate)
             .GroupBy(x => x.Status)
             .OrderByDescending(x => x.Key)
