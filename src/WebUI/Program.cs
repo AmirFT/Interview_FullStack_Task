@@ -39,6 +39,12 @@ app.UseSwaggerUi3(settings =>
     settings.DocumentPath = "/swagger/v1/swagger.json";
 });
 
+app.UseReDoc(options =>
+    {
+        options.Path = "/redoc";
+        
+    });
+
 app.UseRouting();
 
 app.UseAuthentication();
@@ -46,8 +52,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-    // name: "default",
-    // pattern: "{controller}/{action=Index}/{id?}");
+// name: "default",
+// pattern: "{controller}/{action=Index}/{id?}");
 
 app.MapRazorPages();
 
