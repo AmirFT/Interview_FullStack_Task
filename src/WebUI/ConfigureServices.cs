@@ -32,6 +32,18 @@ public static class ConfigureServices
         services.Configure<ApiBehaviorOptions>(options =>
             options.SuppressModelStateInvalidFilter = true);
 
+        #region Cors
+        services.AddCors(options =>
+        {
+            options.AddPolicy("CorsPolicy",
+                builder => builder
+                .WithOrigins("http://localhost:4200")
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+        });
+        #endregion
+
         services.AddOpenApiDocument(configure =>
         {
             configure.Title = "BackEnd API";

@@ -38,6 +38,7 @@ app.UseSwaggerUi3(settings =>
     settings.Path = "/api";
     settings.DocumentPath = "/swagger/v1/swagger.json";
 });
+app.UseCors("CorsPolicy");
 
 app.UseReDoc(options =>
     {
